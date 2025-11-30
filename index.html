@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Responsive Portfolio - Dark Theme</title>
+<style>
+  :root {
+    --accent-color-light: #ff6347;
+    --bg-color-light: #f9f9f9;
+    --text-color-light: #333;
+
+    --accent-color-dark: #ff6f61;
+    --bg-color-dark: #121212;
+    --text-color-dark: #eee;
+
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Light theme default */
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    line-height: 1.4;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: var(--accent-color-light);
+  }
+  button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--accent-color-light);
+    border: none;
+    border-radius: 0.4rem;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
+  }
+  button:hover {
+    transform: translateY(-0.15rem) scale(1.05);
+    box-shadow: 0 0.5rem 1rem rgb(255 99 71 / 0.5);
+  }
+
+  /* Dark theme styles */
+  body.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+  }
+  body.dark a {
+    color: var(--text-color-dark);
+  }
+  body.dark a:hover {
+    color: var(--accent-color-dark);
+  }
+  body.dark button {
+    background-color: var(--accent-color-dark);
+    color: white;
+  }
+  body.dark button:hover {
+    box-shadow: 0 0.5rem 1rem rgb(255 111 97 / 0.7);
+  }
+  body.dark header {
+    background-color: #1e1e1e;
+    box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.7);
+  }
+  body.dark .project-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 0.2rem 0.6rem rgb(0 0 0 / 0.8);
+  }
+  body.dark footer {
+    background-color: #222;
+    color: #ccc;
+  }
+  body.dark .skills-list span {
+    background-color: var(--accent-color-dark);
+  }
+
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2vw;
+    background-color: white;
+    box-shadow: 0 0.1rem 0.5rem rgb(0 0 0 / 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav a {
+    font-weight: 600;
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2vw;
+  }
+
+  /* Hero section with photo and text */
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    animation: fadeUp 0.8s ease-out both;
+  }
+  #hero div.text {
+    max-width: 600px;
+  }
+  #hero h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  #hero p {
+    font-size: 1.125rem;
+    margin: 0 0 1rem;
+  }
+  #hero img {
+    max-width: 300px;
+    width: 80vw;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 0.1);
+  }
+
+  /* Projects section using CSS Grid */
+  #projects {
+    margin-bottom: 4rem;
+  }
+  #projects h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem;
+  }
+  .project-card {
+    background-color: white;
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.2rem 0.6rem rgb(0 0 0 / 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-0.5rem) scale(1.03);
+    box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.15);
+  }
+  .project-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  .project-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  /* Skills section using Flexbox */
+  #skills {
+    margin-bottom: 4rem;
+  }
+  #skills h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+  .skills-list span {
+    background-color: var(--accent-color-light);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Contact section */
+  #contact {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  #contact h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  #contact p {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+  #contact a {
+    color: var(--accent-color-light);
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  #contact a:hover {
+    color: var(--accent-color-dark);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem 2vw;
+    background-color: #222;
+    color: white;
+    font-size: 0.875rem;
+  }
+
+  /* Media Queries: Mobile-first approach */
+  @media (min-width: 48rem) {
+    #hero {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    #hero h1 {
+      font-size: 3rem;
+    }
+    #hero p {
+      font-size: 1.25rem;
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    main {
+      padding: 0 5vw;
+    }
+    .projects-grid {
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+      gap: 2.5rem;
+    }
+    #hero h1 {
+      font-size: 3.5rem;
+    }
+    #hero p {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Keyframe animation */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Dark mode toggle button */
+  #darkModeToggle {
+    font-size: 0.875rem;
+    background: none;
+    border: 2px solid var(--accent-color-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.4rem;
+    color: var(--accent-color-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #darkModeToggle:hover {
+    background-color: var(--accent-color-light);
+    color: white;
+  }
+  body.dark #darkModeToggle {
+    border-color: var(--accent-color-dark);
+    color: var(--accent-color-dark);
+  }
+  body.dark #darkModeToggle:hover {
+    background-color: var(--accent-color-dark);
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">MyPortfolio</div>
+  <nav>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <button id="darkModeToggle" aria-label="Toggle Dark Mode">Dark Mode</button>
+</header>
+
+<main>
+  <section id="hero">
+    <img src="C:\Users\virat\OneDrive\Desktop\ARUSHI_1.jpg" alt="Your photo" />
+    <div class="text">
+      <h1 class="hero-title">Hi, I'm a Developer</h1>
+      <p>Building responsive and interactive web experiences.</p>
+      <button>Contact Me</button>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Project One</h3>
+        <p>A responsive portfolio built with Flexbox and Grid.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Two</h3>
+        <p>A game development project using JavaScript.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Three</h3>
+        <p>An AI-based data visualization tool.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Four</h3>
+        <p>Interactive tourism web portal with quizzes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>Flexbox</span>
+      <span>Grid</span>
+      <span>React</span>
+      <span>AI & Data Science</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:example@mail.com">example@mail.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">yourprofile</a></p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 MyPortfolio. All rights reserved.
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('darkModeToggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if(document.body.classList.contains('dark')) {
+      toggleBtn.textContent = 'Light Mode';
+    } else {
+      toggleBtn.textContent = 'Dark Mode';
+    }
+  });
+</script>
+
+</body>
+</html>
